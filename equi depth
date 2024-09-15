@@ -1,0 +1,21 @@
+sales_prices <- c(5, 10, 11, 13, 15, 35, 50, 55, 72, 92, 204, 215)
+
+
+eq_freq_bins <- split(sales_prices, cut(seq_along(sales_prices), 3, labels = FALSE))
+cat("Equal-Frequency Partitioning:\n")
+print(eq_freq_bins)
+
+
+eq_width_bins <- cut(sales_prices, breaks = 3)
+cat("\nEqual-Width Partitioning:\n")
+print(table(eq_width_bins))
+
+
+set.seed(42)
+kmeans_result <- kmeans(sales_prices, centers = 3)
+
+
+cat("\nClustering Partitioning (K-means):\n")
+for (i in 1:3) {
+  cat("Cluster", i, ":", sales_prices[kmeans_result$cluster == i], "\n")
+}
